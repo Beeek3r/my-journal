@@ -1,0 +1,84 @@
+$theme-colors: (
+  'theme-1': #1e262c,
+  // Dark Dark Grey
+    'theme-2': #f56c2d,
+  // Orange
+    'theme-3': #f5f5f5,
+  // Light Grey
+    'theme-4': #dcdcdc,
+  // Light Blue
+    'theme-5': #1589ff,
+  // Light Light Blue
+    'theme-6': #82cafa,
+  'theme-7': #4cdbd2
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+// my colours
+
+.container-small,
+.container-large {
+  max-width: 100%;
+}
+
+#sideToggler:hover {
+  cursor: pointer;
+  color: #4cdbd2 !important;
+}
+
+.text-light {
+  color: #e1e3e6 !important;
+}
+
+a.text-light:hover,
+a.text-light:focus {
+  color: #aeb6bd !important;
+}
+
+.sidebar {
+  flex: 0 0 210px;
+}
+
+@media (min-width: 768px) {
+  .container-small {
+    width: 500px;
+  }
+
+  .container-large {
+    width: 970px;
+  }
+}
+@media (min-width: 992px) {
+  .container-small {
+    width: 500;
+  }
+
+  .container-large {
+    width: 1170px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-small {
+    width: 500px;
+  }
+
+  .container-large {
+    width: 1500px;
+  }
+}
+
+// Date picker and such
+
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
