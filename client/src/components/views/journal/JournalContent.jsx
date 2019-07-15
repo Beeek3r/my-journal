@@ -15,9 +15,9 @@ const Home = () => {
         <span className="sr-only p-5">Loading...</span>
       </div>
     )
-  } else if (!loadingJournalLog && journalLog.length > 0) {
+  } else if (journalLog && journalLog.length > 0) {
     journalEntries = journalLog.map(journal => <JournalItem journal={journal} key={journal._id} />)
-  } else if (!loadingJournalLog && journalLog.length === 0) {
+  } else if (journalLog && journalLog.length === 0) {
     journalEntries = <h4 class="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
   }
 

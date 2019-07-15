@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, Fragment } from 'react'
 import Navbar from './Navbar'
 import Topbar from './Topbar'
-import JournalContent from './JournalConent'
+import JournalContent from './JournalContent'
 import AuthContext from '../../../context/auth/authContext'
 import JournalContext from '../../../context/journal/journalContext'
 
