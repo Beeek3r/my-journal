@@ -2,24 +2,31 @@ import React from 'react'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Layout from './components/layout/Layout'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import PrivateRoute from './components/routing/PrivateRoute'
-
 import AuthState from './context/auth/AuthState'
 import JournalState from './context/journal/JournalState'
+import NotFound from './components/views/notFound/NotFound'
+
+import Home from './components/views/home/Home'
+import Journal from './components/views/journal/Journal'
+import JournalNew from './components/views/journal-new/JournalNew'
 
 function App() {
   return (
-    // Check if Conntent should be inside or outside the rrouter??
     <AuthState>
       <JournalState>
         <Router>
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <PrivateRoute path="/" component={Layout} />
+
+            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/journal" component={Journal} />
+            <PrivateRoute exact path="/journal/new" component={JournalNew} />
+
+            <PrivateRoute component={NotFound} />
           </Switch>
         </Router>
       </JournalState>

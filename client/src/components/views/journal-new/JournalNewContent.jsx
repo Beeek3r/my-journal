@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, Fragment, useState } from 'react'
-// import JournalItem from './JournalItem'
-// import AuthContext from '../../../context/auth/authContext'
 import JournalContext from '../../../context/journal/journalContext'
-// import JournalModal from './JournalModal'
 import NewJournalMessage from './NewJournalMessage'
 
-const JournalLogEdit = () => {
+const Home = props => {
   // Context
   const journalContext = useContext(JournalContext)
   const { saveNewJournalEntry, newJournalEntryMessage, setNewJournalMessage } = journalContext
@@ -49,24 +46,39 @@ const JournalLogEdit = () => {
     }
   }
 
+  const styles = {
+    textarea: {
+      height: '50vh'
+    },
+    topRow: {
+      marginTop: '67px'
+    },
+    dateBox: {
+      width: '130px'
+    },
+    moodBox: {
+      width: '100px'
+    }
+  }
+
   return (
     <Fragment>
-      <div className="row px-3 justify-content-center" style={{ marginTop: '67px' }}>
+      <div className="row px-3 justify-content-center" style={styles.topRow}>
         <div className="col-12 col-lg-8 mb-3 px-2 d-flex align-items-stretch">
           <div className="col-12 py-4 px-3 shadow-sm bg-white rounded d-flex align-items-center">
             <form className="w-100" onSubmit={onSubmit}>
-              <div class="form-group">
-                <input type="text" class="form-control" name="title" placeholder="Title" onChange={onChange} />
+              <div className="form-group">
+                <input type="text" className="form-control" name="title" placeholder="Title" onChange={onChange} />
               </div>
-              <div class="form-group">
-                <textarea class="form-control" name="body" placeholder="Journal entry" onChange={onChange} style={{height: '50vh'}} />
+              <div className="form-group">
+                <textarea className="form-control" name="body" placeholder="Journal entry" onChange={onChange} style={styles.textarea} />
               </div>
-              <div class="form-row ">
-                <div class="form-group mx-1" style={{ width: '130px' }}>
-                  <input type="date" class="form-control form-control-sm text-center" name="date" onChange={onChange} />
+              <div className="form-row ">
+                <div className="form-group mx-1" style={styles.dateBox}>
+                  <input type="date" className="form-control form-control-sm text-center" name="date" onChange={onChange} />
                 </div>
-                <div class="form-group mx-1" style={{ width: '100px' }}>
-                  <select class="form-control form-control-sm" id="exampleFormControlSelect1" name="mood" onChange={onChange} value={entry.mood}>
+                <div className="form-group mx-1" style={styles.moodBox}>
+                  <select className="form-control form-control-sm" name="mood" onChange={onChange} value={entry.mood}>
                     <option value="neutral">Mood</option>
                     <option value="neutral">Neutral</option>
                     <option value="happy">Happy</option>
@@ -74,12 +86,12 @@ const JournalLogEdit = () => {
                     <option value="angry">Angry</option>
                   </select>
                 </div>
-                <div class="form-group mx-1">
+                <div className="form-group mx-1">
                   <i id="favourite" className={`${favouriteIcon} fa-star fa-lg fa-fw text-warning mt-2`} onClick={toggle} />
                 </div>
               </div>
               <button className="btn btn-theme-4 btn-sm text-muted" type="submit">
-                <i class="fas fa-save fa-fw" /> Save
+                <i className="fas fa-save fa-fw" /> Save
               </button>
               {newJournalEntryMessage && <NewJournalMessage />}
             </form>
@@ -90,4 +102,4 @@ const JournalLogEdit = () => {
   )
 }
 
-export default JournalLogEdit
+export default Home

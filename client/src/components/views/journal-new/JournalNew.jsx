@@ -1,19 +1,15 @@
-import React, { useContext, useEffect, Fragment } from 'react'
+import React, { useContext, useEffect } from 'react'
+import AuthContext from '../../../context/auth/authContext'
 import Navbar from './Navbar'
 import Topbar from './Topbar'
-import JournalContent from './JournalConent'
-import AuthContext from '../../../context/auth/authContext'
-import JournalContext from '../../../context/journal/journalContext'
+import JournalNewContent from './JournalNewContent'
 
-const Journal = props => {
+const JournalNew = props => {
   const authContext = useContext(AuthContext)
   const { loadUser } = authContext
 
-  const journalContext = useContext(JournalContext)
-  const { getJournalLog } = journalContext
-
   useEffect(() => {
-    loadUser().then(getJournalLog())
+    loadUser()
     // eslint-disable-next-line
   }, [])
 
@@ -39,10 +35,10 @@ const Journal = props => {
       </div>
       <div className="col min-vh-100" style={styles.contentColumn}>
         <Topbar page={props.location.pathname} />
-        <JournalContent />
+        <JournalNewContent />
       </div>
     </div>
   )
 }
 
-export default Journal
+export default JournalNew
