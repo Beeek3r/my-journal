@@ -1,16 +1,29 @@
 import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../../context/auth/authContext'
+import JournalContext from '../../../context/journal/journalContext'
 import logo from '../../../assets/logo.png'
 
-const styles = {
-  navLink: 'nav-link text-light w-100 p-2',
-  navSubLink: 'nav-link text-light w-100 p-2'
-}
-
 const Navbar = () => {
+  // Auth Context
   const authContext = useContext(AuthContext)
   const { logout } = authContext
+
+  // Journal Context
+  const journalContent = useContext(JournalContext)
+  const { clearJournalLog } = journalContent
+
+  // Styles
+  const styles = {
+    navLink: 'nav-link text-light w-100 p-2',
+    navSubLink: 'nav-link text-light w-100 p-2'
+  }
+
+  // Methods
+  const onLogout = () => {
+    logout()
+    clearJournalLog()
+  }
 
   return (
     <Fragment>
@@ -105,7 +118,7 @@ const Navbar = () => {
             <i className="fas fa-user fa-fw mr-2" />
             <span>ACCOUNT</span>
           </Link>
-          <Link to="/#" onClick={logout} className={styles.navLink}>
+          <Link to="/#" onClick={onLogout} className={styles.navLink}>
             <i className="fas fa-sign-out-alt fa-fw mr-2" />
             <span>LOGOUT</span>
           </Link>

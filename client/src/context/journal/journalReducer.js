@@ -1,4 +1,4 @@
-import { GET_JOURNAL_LOG, GET_JOURNAL, CLEAR_JOURNAL, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS } from '../types'
+import { GET_JOURNAL_LOG, GET_JOURNAL, CLEAR_JOURNAL, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG } from '../types'
 
 export default (state, action) => {
   switch (action.type) {
@@ -7,6 +7,12 @@ export default (state, action) => {
         ...state,
         journalLog: action.payload,
         loadingJournalLog: false
+      }
+
+    case CLEAR_JOURNAL_LOG:
+      return {
+        ...state,
+        journalLog: null
       }
 
     case GET_JOURNAL:

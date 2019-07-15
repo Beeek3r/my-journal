@@ -8,6 +8,19 @@ const Home = () => {
   const journalContext = useContext(JournalContext)
   const { journalLog, loadingJournalLog, journal, message } = journalContext
 
+  let journalEntries
+  if (loadingJournalLog) {
+    journalEntries = (
+      <div className="spinner-grow text-theme-7" style={{ width: '3rem', height: '3rem' }} role="status">
+        <span className="sr-only p-5">Loading...</span>
+      </div>
+    )
+  } else if (!loadingJournalLog && journalLog.length > 0) {
+    journalEntries = journalLog.map(journal => <JournalItem journal={journal} key={journal._id} />)
+  } else if (!loadingJournalLog && journalLog.length === 0) {
+    journalEntries = <h4 class="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
+  }
+
   return (
     <Fragment>
       <div className="row px-3 justify-content-center" style={{ marginTop: '67px' }}>
@@ -32,11 +45,11 @@ const Home = () => {
         </div>
       </div>
       <div className="row px-3 justify-content-center">
-        <div className="col-12 col-lg-8  mb-3 px-2 d-flex align-items-stretch">
+        <div className="col-12 col-lg-8  mb-3 px-2 d-flex align-items-stretch" style={{ minHeight: '50vh' }}>
           <div className="col-12 px-5 py-4 shadow-sm bg-white rounded text-center">
             {message && !loadingJournalLog ? <Message /> : <Fragment />}
 
-            {// prettier-ignore
+            {/* {// prettier-ignore
             loadingJournalLog ? 
               <div className="spinner-grow text-theme-7" style={{width: '3rem', height: '3rem'}} role="status">
                 <span className="sr-only p-5">Loading...</span>
@@ -44,7 +57,8 @@ const Home = () => {
               : 
               journalLog.map(journal => (
                 <JournalItem journal={journal} key={journal._id} />
-              ))}
+              ))} */}
+            {journalEntries}
           </div>
 
           <JournalModal journal={journal} />

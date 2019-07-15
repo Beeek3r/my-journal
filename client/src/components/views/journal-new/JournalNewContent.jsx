@@ -68,7 +68,7 @@ const Home = props => {
           <div className="col-12 py-4 px-3 shadow-sm bg-white rounded d-flex align-items-center">
             <form className="w-100" onSubmit={onSubmit}>
               <div className="form-group">
-                <input type="text" className="form-control" name="title" placeholder="Title" onChange={onChange} />
+                <input type="text" className="form-control" name="title" placeholder="Title" onChange={onChange} required />
               </div>
               <div className="form-group">
                 <textarea className="form-control" name="body" placeholder="Journal entry" onChange={onChange} style={styles.textarea} />

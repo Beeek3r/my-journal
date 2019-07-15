@@ -3,7 +3,7 @@ import JournalContext from './journalContext'
 import journalReducer from './journalReducer'
 import axios from 'axios'
 import setAuthToken from '../../utilities/setAuthToken'
-import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS } from '../types'
+import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG } from '../types'
 
 const JournalState = props => {
   // State
@@ -31,6 +31,10 @@ const JournalState = props => {
     }
   }
 
+  const clearJournalLog = () => {
+    dispatch({ type: CLEAR_JOURNAL_LOG })
+  }
+
   const saveNewJournalEntry = async entry => {
     if (entry.date === null) {
       delete entry.date
@@ -56,7 +60,7 @@ const JournalState = props => {
     dispatch({ type: SAVE_NEW_JOURNAL_ENTRY_SUCCESS, payload: message })
     setTimeout(() => {
       clearNewJournalMessage()
-    }, 5000)
+    }, 2000)
   }
 
   const clearNewJournalMessage = () => {
@@ -78,7 +82,7 @@ const JournalState = props => {
       getJournalLog()
       setTimeout(() => {
         removeMessage()
-      }, 5000)
+      }, 2000)
     } catch (err) {
       console.log(err) // GOtta Double Check this stuf fhere my man
     }
@@ -105,7 +109,8 @@ const JournalState = props => {
         deleteJournalEntry,
         message: message,
         newJournalEntryMessage,
-        setNewJournalMessage
+        setNewJournalMessage,
+        clearJournalLog
       }}>
       {props.children}
     </JournalContext.Provider>

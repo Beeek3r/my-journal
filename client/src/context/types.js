@@ -10,6 +10,7 @@ export const LOGOUT = 'LOGOUT'
 
 // Journal
 export const GET_JOURNAL_LOG = 'GET_JOURNAL_LOG'
+export const CLEAR_JOURNAL_LOG = 'CLEAR_JOURNAL_LOG'
 export const GET_JOURNAL = 'GET_JOURNAL'
 export const CLEAR_JOURNAL = 'CLEAR_JOURNAL'
 export const SET_JOURNAL_ENTRY = 'SET_JOURNAL_ENTRY'
