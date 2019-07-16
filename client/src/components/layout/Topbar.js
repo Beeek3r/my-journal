@@ -14,7 +14,6 @@ const Topbar = props => {
   // Topbar Title
   let title
 
-  console.log(props.page)
   switch (props.page) {
     case '/':
       title = 'Dashboard'
@@ -31,7 +30,6 @@ const Topbar = props => {
     default:
       title = 'Not working yo'
   }
-  console.log('here')
 
   return (
     <Fragment>

@@ -3,7 +3,7 @@ import JournalContext from '../../../context/journal/journalContext'
 
 const JournalModal = props => {
   const journalContext = useContext(JournalContext)
-  const { journal, deleteJournalEntry } = journalContext
+  const { journal, deleteJournalEntry, editJournalEntry } = journalContext
 
   const onDelete = () => {
     const alert = window.confirm('Are you sure you wish to delete this entry?')
@@ -16,6 +16,16 @@ const JournalModal = props => {
     } else {
       console.log('Does not wish to delete')
     }
+  }
+
+  const onEdit = () => {
+    const $ = window.$
+
+    editJournalEntry(props.journal)
+
+    $('#journal-modal').modal('hide')
+
+    props.history.push('/journal/edit')
   }
 
   return (
@@ -38,7 +48,7 @@ const JournalModal = props => {
           <div class="modal-footer">
             {journal && <i class={journal.moodIcon} />}
             {journal && <i class={journal.favouriteIcon} />}
-            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted">
+            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={onEdit}>
               <i class="fas fa-pen fa-fw" /> Edit
             </button>
             <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={onDelete}>

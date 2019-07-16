@@ -18,6 +18,7 @@ const JournalItem = props => {
 
   const onEdit = () => {
     editJournalEntry(props.journal)
+    props.history.push('/journal/edit')
   }
 
   let moodIcon
@@ -40,11 +41,7 @@ const JournalItem = props => {
 
   const confirm = () => {
     const alert = window.confirm('Are you sure you wish to delete this entry?')
-    if (alert) {
-      deleteJournalEntry(_id)
-    } else {
-      console.log('Not deleting item')
-    }
+    alert && deleteJournalEntry(_id)
   }
 
   // Maximum 400 characters displayed on Journal Log

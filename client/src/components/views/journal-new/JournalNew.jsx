@@ -16,7 +16,7 @@ const JournalNew = props => {
   useEffect(() => {
     loadUser()
     if (newJournalEntryMessage && newJournalEntryMessage.msg === 'Journal has been successfully saved.') {
-      props.history.push('/journal')
+      props.history.push('/journal') //Pushes back when message is stil up lmao fix that
     } // eslint-disable-next-line
   }, [newJournalEntryMessage, props.history])
 

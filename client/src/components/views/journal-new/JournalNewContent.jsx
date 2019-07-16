@@ -17,7 +17,6 @@ const JournalNewContent = props => {
   })
 
   const onChange = e => {
-    console.log(e.target.name)
     setEntry({
       ...entry,
       [e.target.name]: e.target.value

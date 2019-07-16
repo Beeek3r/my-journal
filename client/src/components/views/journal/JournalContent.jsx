@@ -4,7 +4,7 @@ import JournalModal from './JournalModal'
 import Message from './Message'
 import JournalContext from '../../../context/journal/journalContext'
 
-const Home = () => {
+const JournalContent = props => {
   const journalContext = useContext(JournalContext)
   const { journalLog, loadingJournalLog, journal, message } = journalContext
 
@@ -16,7 +16,7 @@ const Home = () => {
       </div>
     )
   } else if (journalLog && journalLog.length > 0) {
-    journalEntries = journalLog.map(journal => <JournalItem journal={journal} key={journal._id} />)
+    journalEntries = journalLog.map(journal => <JournalItem journal={journal} key={journal._id} history={props.history} />)
   } else if (journalLog && journalLog.length === 0) {
     journalEntries = <h4 class="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
   }
@@ -61,11 +61,11 @@ const Home = () => {
             {journalEntries}
           </div>
 
-          <JournalModal journal={journal} />
+          <JournalModal journal={journal} history={props.history} />
         </div>
       </div>
     </Fragment>
   )
 }
 
-export default Home
+export default JournalContent

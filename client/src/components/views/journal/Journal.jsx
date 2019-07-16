@@ -39,7 +39,7 @@ const Journal = props => {
       </div>
       <div className="col min-vh-100" style={styles.contentColumn}>
         <Topbar page={props.location.pathname} />
-        <JournalContent />
+        <JournalContent history={props.history} />
       </div>
     </div>
   )

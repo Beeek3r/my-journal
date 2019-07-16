@@ -16,7 +16,6 @@ export default (state, action) => {
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGOUT:
-      console.log('Error from register fail', action.payload)
       localStorage.removeItem('token')
       return {
         ...state,
