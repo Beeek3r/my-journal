@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from 'react'
 import AuthContext from '../../../context/auth/authContext'
 import Navbar from '../../../common/Navbar'
 import Topbar from '../../../common/Topbar'
-import JournalNewContent from './JournalNewContent'
+import JournalEditContent from './JournalEditContent'
 
 import JournalContext from '../../../context/journal/journalContext'
 
-const JournalNew = props => {
+const JournalEdit = props => {
   const authContext = useContext(AuthContext)
   const { loadUser } = authContext
 
@@ -15,10 +15,10 @@ const JournalNew = props => {
 
   useEffect(() => {
     loadUser()
-    if (newJournalEntryMessage && newJournalEntryMessage.msg === 'Journal has been successfully saved.') {
-      props.history.push('/journal')
-    } // eslint-disable-next-line
-  }, [newJournalEntryMessage, props.history])
+    // if (newJournalEntryMessage && newJournalEntryMessage.msg === 'Journal has been successfully saved.') {
+    //   props.history.push('/journal')
+    // eslint-disable-next-line
+  }, [])
 
   const styles = {
     sideNav: {
@@ -42,10 +42,10 @@ const JournalNew = props => {
       </div>
       <div className="col min-vh-100" style={styles.contentColumn}>
         <Topbar page={props.location.pathname} />
-        <JournalNewContent />
+        <JournalEditContent history={props.history} />
       </div>
     </div>
   )
 }
 
-export default JournalNew
+export default JournalEdit

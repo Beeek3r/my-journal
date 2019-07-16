@@ -1,11 +1,26 @@
 import React, { useContext, useEffect, Fragment, useState } from 'react'
 import JournalContext from '../../../context/journal/journalContext'
-import NewJournalMessage from './JournalNewMessage'
+import moment from 'moment'
 
-const JournalNewContent = props => {
-  // Context
+const JournalEditContent = props => {
   const journalContext = useContext(JournalContext)
-  const { saveNewJournalEntry, newJournalEntryMessage, setNewJournalMessage } = journalContext
+  const { saveNewJournalEntry, setNewJournalMessage, journal } = journalContext
+
+  useEffect(() => {
+    if (journal) {
+      setEntry({
+        ...entry,
+        title: journal.title,
+        body: journal.body,
+        date: moment(journal.date).format('YYYY-MM-DD'),
+        mood: journal.mood,
+        favourite: journal.mood
+      })
+    } else {
+      props.history.push('/journal')
+    }
+    // eslint-disable-next-line
+  }, [journal])
 
   // State
   const [entry, setEntry] = useState({
@@ -17,23 +32,24 @@ const JournalNewContent = props => {
   })
 
   const onChange = e => {
-    console.log(e.target.name)
     setEntry({
       ...entry,
       [e.target.name]: e.target.value
     })
   }
 
-  let favouriteIcon = 'far'
+  let favouriteIcon
+  if (entry.favourite) {
+    favouriteIcon = 'fas fa-star fa-lg fa-fw text-warning mt-2'
+  } else {
+    favouriteIcon = 'far fa-star fa-lg fa-fw text-warning mt-2'
+  }
+
   const toggle = () => {
-    let favorite = document.getElementById('favourite')
-    if (favorite.className === 'fas fa-star fa-lg fa-fw text-warning mt-2') {
-      favorite.className = 'far fa-star fa-lg fa-fw text-warning mt-2'
-      setEntry({ ...entry, favourite: false })
-    } else {
-      favorite.className = 'fas fa-star fa-lg fa-fw text-warning mt-2'
-      setEntry({ ...entry, favourite: true })
-    }
+    setEntry({
+      ...entry,
+      favourite: !entry.favourite
+    })
   }
 
   const onSubmit = e => {
@@ -68,14 +84,14 @@ const JournalNewContent = props => {
           <div className="col-12 py-4 px-3 shadow-sm bg-white rounded d-flex align-items-center">
             <form className="w-100" onSubmit={onSubmit}>
               <div className="form-group">
-                <input type="text" className="form-control" name="title" placeholder="Title" onChange={onChange} required />
+                <input type="text" className="form-control" name="title" placeholder="Title" onChange={onChange} value={entry.title} required />
               </div>
               <div className="form-group">
-                <textarea className="form-control" name="body" placeholder="Journal entry" onChange={onChange} style={styles.textarea} />
+                <textarea className="form-control" name="body" placeholder="Journal entry" onChange={onChange} value={entry.body} style={styles.textarea} />
               </div>
               <div className="form-row ">
                 <div className="form-group mx-1" style={styles.dateBox}>
-                  <input type="date" className="form-control form-control-sm text-center" name="date" onChange={onChange} />
+                  <input type="date" id="date" className="form-control form-control-sm text-center" name="date" onChange={onChange} value={entry.date} />
                 </div>
                 <div className="form-group mx-1" style={styles.moodBox}>
                   <select className="form-control form-control-sm" name="mood" onChange={onChange} value={entry.mood}>
@@ -93,7 +109,7 @@ const JournalNewContent = props => {
               <button className="btn btn-theme-4 btn-sm text-muted" type="submit">
                 <i className="fas fa-save fa-fw" /> Save
               </button>
-              {newJournalEntryMessage && <NewJournalMessage />}
+              {/* {newJournalEntryMessage && <NewJournalMessage />} */}
             </form>
           </div>
         </div>
@@ -102,4 +118,4 @@ const JournalNewContent = props => {
   )
 }
 
-export default JournalNewContent
+export default JournalEditContent

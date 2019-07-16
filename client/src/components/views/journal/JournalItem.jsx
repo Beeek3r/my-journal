@@ -9,11 +9,15 @@ const JournalItem = props => {
 
   // Context
   const journalContext = useContext(JournalContext)
-  const { setJournalEntry, deleteJournalEntry } = journalContext
+  const { setJournalEntry, deleteJournalEntry, editJournalEntry } = journalContext
 
   // Methods
   const getJournalEntry = () => {
     setJournalEntry(props.journal, moodIcon, favouriteIcon)
+  }
+
+  const onEdit = () => {
+    editJournalEntry(props.journal)
   }
 
   let moodIcon
@@ -43,6 +47,16 @@ const JournalItem = props => {
     }
   }
 
+  // Maximum 400 characters displayed on Journal Log
+  let displayBody
+  body.length > 400 ? (displayBody = `${body.slice(0, 300)}...`) : (displayBody = body)
+
+  // Styling
+  const styles = {
+    button: { fontSize: '0.8rem' },
+    date: { fontSize: '0.85rem' }
+  }
+
   return (
     <Fragment>
       <div className="row mb-4" style={{ minHeight: '150px' }}>
@@ -53,21 +67,23 @@ const JournalItem = props => {
               <div className="col-12 col-md-3 text-center text-md-right">
                 <i className={moodIcon} />
                 <i className={favouriteIcon} />
-                <span className="font-weight-normal">{date}</span>
+                <span className="font-weight-normal" style={styles.date}>
+                  {date}
+                </span>
               </div>
             </div>
           </div>
           <div className="card-body">
             <p className="card-text text-muted text-left mb-4" style={{ whiteSpace: 'pre-wrap' }}>
-              {body.length > 250 ? `${body.slice(0, 250)}...` : body}
+              {displayBody}
             </p>
-            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={confirm}>
+            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={confirm} style={styles.button}>
               <i class="fas fa-trash fa-fw" /> Delete
             </button>
-            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted">
+            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={onEdit} style={styles.button}>
               <i class="fas fa-pen fa-fw" /> Edit
             </button>
-            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" data-toggle="modal" onClick={getJournalEntry} data-target="#journal-modal">
+            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={getJournalEntry} data-toggle="modal" data-target="#journal-modal" style={styles.button}>
               <i class="fas fa-eye fa-fw" /> View
             </button>
           </div>

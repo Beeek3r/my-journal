@@ -1,14 +1,21 @@
 import React, { useContext } from 'react'
 import JournalContext from '../../../context/journal/journalContext'
 
-const JournalModal = () => {
+const JournalModal = props => {
   const journalContext = useContext(JournalContext)
-  const { journal } = journalContext
+  const { journal, deleteJournalEntry } = journalContext
 
-  // Confirm Deleteing A Journal Entry
-  const confirm = () => {
+  const onDelete = () => {
     const alert = window.confirm('Are you sure you wish to delete this entry?')
-    alert ? console.log('Delete entry') : console.log('Do not delete entry')
+
+    if (alert) {
+      const $ = window.$
+
+      deleteJournalEntry(journal._id)
+      $('#journal-modal').modal('hide')
+    } else {
+      console.log('Does not wish to delete')
+    }
   }
 
   return (
@@ -34,7 +41,7 @@ const JournalModal = () => {
             <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted">
               <i class="fas fa-pen fa-fw" /> Edit
             </button>
-            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={confirm}>
+            <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={onDelete}>
               <i class="fas fa-trash fa-fw" /> Delete
             </button>
             <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" data-dismiss="modal">

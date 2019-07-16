@@ -59,7 +59,7 @@ const Navbar = () => {
             <span>FINANCE</span>
           </Link>
           <div id="collapseFinance" className="collapse w-100 pl-4" aria-labelledby="headingOne" data-parent="#accordion">
-            <Link to="/" className={styles.navSubLink} style={{ fontSize: '12px' }}>
+            <Link to="/journal/edit" className={styles.navSubLink} style={{ fontSize: '12px' }}>
               <i className="fas fa-credit-card fa-fw mr-2" />
               <span>INCOME STATEMENT</span>
             </Link>

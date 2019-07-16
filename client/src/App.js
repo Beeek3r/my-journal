@@ -12,6 +12,7 @@ import NotFound from './components/views/notFound/NotFound'
 import Home from './components/views/home/Home'
 import Journal from './components/views/journal/Journal'
 import JournalNew from './components/views/journal-new/JournalNew'
+import JournalEdit from './components/views/journal-edit/JournalEdit'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <PrivateRoute exact path="/" component={Home} />
             <PrivateRoute exact path="/journal" component={Journal} />
             <PrivateRoute exact path="/journal/new" component={JournalNew} />
+            <PrivateRoute exact path="/journal/edit" component={JournalEdit} />
 
             <PrivateRoute component={NotFound} />
           </Switch>

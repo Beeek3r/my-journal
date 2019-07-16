@@ -28,6 +28,10 @@ const Topbar = props => {
       title = 'New Entry'
       break
 
+    case '/journal/edit':
+      title = 'Edit Entry'
+      break
+
     default:
       title = 'Not working yo'
   }

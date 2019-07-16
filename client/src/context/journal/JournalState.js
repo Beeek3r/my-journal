@@ -3,7 +3,7 @@ import JournalContext from './journalContext'
 import journalReducer from './journalReducer'
 import axios from 'axios'
 import setAuthToken from '../../utilities/setAuthToken'
-import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG } from '../types'
+import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG, EDIT_ENTRY } from '../types'
 
 const JournalState = props => {
   // State
@@ -60,7 +60,7 @@ const JournalState = props => {
     dispatch({ type: SAVE_NEW_JOURNAL_ENTRY_SUCCESS, payload: message })
     setTimeout(() => {
       clearNewJournalMessage()
-    }, 2000)
+    }, 10000)
   }
 
   const clearNewJournalMessage = () => {
@@ -96,6 +96,10 @@ const JournalState = props => {
     dispatch({ type: SET_LOADING })
   }
 
+  const editJournalEntry = journal => {
+    dispatch({ type: EDIT_ENTRY, payload: journal })
+  }
+
   return (
     <JournalContext.Provider
       value={{
@@ -110,7 +114,8 @@ const JournalState = props => {
         message: message,
         newJournalEntryMessage,
         setNewJournalMessage,
-        clearJournalLog
+        clearJournalLog,
+        editJournalEntry
       }}>
       {props.children}
     </JournalContext.Provider>

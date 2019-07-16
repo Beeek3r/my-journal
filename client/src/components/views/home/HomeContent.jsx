@@ -1,6 +1,6 @@
-import React, { useContext, Fragment } from 'react'
+import React, { Fragment } from 'react'
 
-const Home = props => {
+const Home = () => {
   return (
     <Fragment>
       {/* End of Content */}
