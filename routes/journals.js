@@ -56,8 +56,12 @@ router.post(
         user: req.user.id
       })
 
-      const journal = await newJournal.save()
-      res.json({ journal })
+      // Old version just in case it breaks
+      // const journal = await newJournal.save()
+      // res.json({ journal })
+
+      await newJournal.save()
+      res.json({ msg: 'Sucessfully saved journal entry.' })
     } catch (err) {
       console.error(err.message)
       res.status(500).send('Server error')
@@ -101,7 +105,7 @@ router.delete('/:id', auth, async (req, res) => {
   if (journal.user.toString() !== req.user.id) return res.status(401).send('Not authorized')
 
   await Journal.findByIdAndRemove(req.params.id)
-  res.json({ msg: 'Sucessfully removed contact' })
+  res.json({ msg: 'Sucessfully removed journal entry.' })
 })
 
 // Exports

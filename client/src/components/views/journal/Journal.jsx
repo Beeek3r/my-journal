@@ -10,10 +10,11 @@ const Journal = props => {
   const { loadUser } = authContext
 
   const journalContext = useContext(JournalContext)
-  const { getJournalLog } = journalContext
+  const { getJournalLog, removeMessage } = journalContext
 
   useEffect(() => {
     loadUser().then(getJournalLog())
+    removeMessage()
     // eslint-disable-next-line
   }, [])
 

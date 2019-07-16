@@ -10661,3 +10661,7 @@ select {
   text-indent: 1px;
   text-overflow: '';
 }
+
+.errorButtonClose:hover {
+  cursor: pointer;
+}

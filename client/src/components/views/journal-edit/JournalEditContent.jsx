@@ -16,8 +16,6 @@ const JournalEditContent = props => {
         mood: journal.mood,
         favourite: journal.mood
       })
-    } else {
-      props.history.push('/journal')
     }
     // eslint-disable-next-line
   }, [journal])
@@ -54,12 +52,8 @@ const JournalEditContent = props => {
 
   const onSubmit = e => {
     e.preventDefault()
-
-    if (entry.title == '') {
-      setNewJournalMessage({ msg: 'Please enter a title for this entry.', type: 'danger' })
-    } else {
-      saveNewJournalEntry(entry)
-    }
+    console.log('need to add functionality')
+    props.history.push('/journal')
   }
 
   const styles = {

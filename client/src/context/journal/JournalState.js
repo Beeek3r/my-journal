@@ -3,7 +3,7 @@ import JournalContext from './journalContext'
 import journalReducer from './journalReducer'
 import axios from 'axios'
 import setAuthToken from '../../utilities/setAuthToken'
-import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG, EDIT_ENTRY } from '../types'
+import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS } from '../types'
 
 const JournalState = props => {
   // State
@@ -42,15 +42,10 @@ const JournalState = props => {
 
     try {
       if (localStorage.token) setAuthToken(localStorage.getItem('token'))
-      await axios.post('/api/journals', entry)
-
-      setNewJournalMessage({ msg: 'Journal has been successfully saved.', type: 'success' })
-
+      const res = await axios.post('/api/journals', entry)
+      dispatch({ type: SAVE_JOURNAL_ENTRY_SUCCESS, payload: res.data })
       setLoading()
       getJournalLog()
-      setTimeout(() => {
-        removeMessage()
-      }, 5000)
     } catch (err) {
       console.log(err.message.data)
     }
@@ -58,9 +53,9 @@ const JournalState = props => {
 
   const setNewJournalMessage = message => {
     dispatch({ type: SAVE_NEW_JOURNAL_ENTRY_SUCCESS, payload: message })
-    setTimeout(() => {
-      clearNewJournalMessage()
-    }, 10000)
+    // setTimeout(() => {
+    //   clearNewJournalMessage()
+    // }, 2000)
   }
 
   const clearNewJournalMessage = () => {
@@ -77,12 +72,9 @@ const JournalState = props => {
     try {
       if (localStorage.token) setAuthToken(localStorage.getItem('token'))
       const res = await axios.delete(`/api/journals/${id}`)
-      dispatch({ type: DELETE_JOURNAL_ENTRY_SUCCESS, payload: res.data.msg })
+      dispatch({ type: DELETE_JOURNAL_ENTRY_SUCCESS, payload: res.data })
       setLoading()
       getJournalLog()
-      setTimeout(() => {
-        removeMessage()
-      }, 2000)
     } catch (err) {
       console.log(err) // GOtta Double Check this stuf fhere my man
     }
@@ -115,7 +107,8 @@ const JournalState = props => {
         newJournalEntryMessage,
         setNewJournalMessage,
         clearJournalLog,
-        editJournalEntry
+        editJournalEntry,
+        removeMessage
       }}>
       {props.children}
     </JournalContext.Provider>
