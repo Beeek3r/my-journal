@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, Fragment } from 'react'
 import AuthContext from '../../../context/auth/authContext'
-import Navbar from './Navbar'
-import Topbar from './Topbar'
+import Navbar from '../../../common/Navbar'
+import Topbar from '../../../common/Topbar'
 import HomeContent from './HomeContent'
 
 const Home = props => {

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, Fragment } from 'react'
-import Navbar from './Navbar'
-import Topbar from './Topbar'
 import JournalContent from './JournalContent'
 import AuthContext from '../../../context/auth/authContext'
 import JournalContext from '../../../context/journal/journalContext'
+import Navbar from '../../../common/Navbar'
+import Topbar from '../../../common/Topbar'
 
 const Journal = props => {
   const authContext = useContext(AuthContext)

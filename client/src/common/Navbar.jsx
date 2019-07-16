@@ -1,25 +1,21 @@
 import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import AuthContext from '../../../context/auth/authContext'
-import JournalContext from '../../../context/journal/journalContext'
-import logo from '../../../assets/logo.png'
+import AuthContext from '../context/auth/authContext'
+import JournalContext from '../context/journal/journalContext'
+import logo from './logo.png'
+
+const styles = {
+  navLink: 'nav-link text-light w-100 p-2',
+  navSubLink: 'nav-link text-light w-100 p-2'
+}
 
 const Navbar = () => {
-  // Auth Context
   const authContext = useContext(AuthContext)
   const { logout } = authContext
 
-  // Journal Context
   const journalContent = useContext(JournalContext)
   const { clearJournalLog } = journalContent
 
-  // Styles
-  const styles = {
-    navLink: 'nav-link text-light w-100 p-2',
-    navSubLink: 'nav-link text-light w-100 p-2'
-  }
-
-  // Methods
   const onLogout = () => {
     logout()
     clearJournalLog()

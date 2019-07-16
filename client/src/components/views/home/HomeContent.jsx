@@ -1,8 +1,4 @@
-import React, { useContext, useEffect, Fragment } from 'react'
-import AuthContext from '../../../context/auth/authContext'
-import Navbar from './Navbar'
-import Topbar from './Topbar'
-import HomeContent from './HomeContent'
+import React, { useContext, Fragment } from 'react'
 
 const Home = props => {
   return (

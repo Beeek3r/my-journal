@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import AuthContext from '../../../context/auth/authContext'
-import Navbar from './Navbar'
-import Topbar from './Topbar'
+import Navbar from '../../../common/Navbar'
+import Topbar from '../../../common/Topbar'
 import JournalNewContent from './JournalNewContent'
 
 const JournalNew = props => {
