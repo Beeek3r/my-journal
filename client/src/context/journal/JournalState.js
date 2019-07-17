@@ -4,6 +4,7 @@ import journalReducer from './journalReducer'
 import axios from 'axios'
 import setAuthToken from '../../utilities/setAuthToken'
 import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS } from '../types'
+import { withRouter } from "react-router-dom";
 
 const JournalState = props => {
   // State
@@ -35,7 +36,7 @@ const JournalState = props => {
     dispatch({ type: CLEAR_JOURNAL_LOG })
   }
 
-  const saveNewJournalEntry = async entry => {
+  const saveNewJournalEntry = async (entry) => {
     if (entry.date === null) {
       delete entry.date
     }
@@ -46,6 +47,7 @@ const JournalState = props => {
       dispatch({ type: SAVE_JOURNAL_ENTRY_SUCCESS, payload: res.data })
       setLoading()
       getJournalLog()
+      props.history.push('/journal')
     } catch (err) {
       console.log(err.message.data)
     }
@@ -75,6 +77,7 @@ const JournalState = props => {
       dispatch({ type: DELETE_JOURNAL_ENTRY_SUCCESS, payload: res.data })
       setLoading()
       getJournalLog()
+
     } catch (err) {
       console.log(err) // GOtta Double Check this stuf fhere my man
     }
@@ -115,4 +118,4 @@ const JournalState = props => {
   )
 }
 
-export default JournalState
+export default withRouter(JournalState) 

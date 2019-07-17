@@ -16,23 +16,23 @@ import JournalEdit from './components/views/journal-edit/JournalEdit'
 
 function App() {
   return (
-    <AuthState>
-      <JournalState>
-        <Router>
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+    <Router>
+      <AuthState>
+        <JournalState>
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
 
-            <PrivateRoute exact path="/" component={Home} />
-            <PrivateRoute exact path="/journal" component={Journal} />
-            <PrivateRoute exact path="/journal/new" component={JournalNew} />
-            <PrivateRoute exact path="/journal/edit" component={JournalEdit} />
+              <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute exact path="/journal" component={Journal} />
+              <PrivateRoute exact path="/journal/new" component={JournalNew} />
+              <PrivateRoute exact path="/journal/edit" component={JournalEdit} />
 
-            <PrivateRoute component={NotFound} />
-          </Switch>
-        </Router>
-      </JournalState>
-    </AuthState>
+              <PrivateRoute component={NotFound} />
+            </Switch>
+        </JournalState>
+      </AuthState>
+    </Router>
   )
 }
 

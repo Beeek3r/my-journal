@@ -44,9 +44,9 @@ const JournalItem = props => {
     alert && deleteJournalEntry(_id)
   }
 
-  // Maximum 400 characters displayed on Journal Log
+  // Maximum 350 characters displayed on Journal Log
   let displayBody
-  body.length > 400 ? (displayBody = `${body.slice(0, 300)}...`) : (displayBody = body)
+  body.length > 300 ? (displayBody = `${body.slice(0, 300)}...`) : (displayBody = body)
 
   // Styling
   const styles = {

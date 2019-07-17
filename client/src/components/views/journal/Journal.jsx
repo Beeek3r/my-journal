@@ -14,7 +14,7 @@ const Journal = props => {
 
   useEffect(() => {
     loadUser().then(getJournalLog())
-    removeMessage()
+    // removeMessage()
     // eslint-disable-next-line
   }, [])
 
