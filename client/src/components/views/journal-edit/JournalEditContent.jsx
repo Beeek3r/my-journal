@@ -4,7 +4,7 @@ import moment from 'moment'
 
 const JournalEditContent = props => {
   const journalContext = useContext(JournalContext)
-  const { saveNewJournalEntry, setNewJournalMessage, journal } = journalContext
+  const { journal, updateJournalEntry } = journalContext
 
   useEffect(() => {
     if (journal) {
@@ -14,7 +14,7 @@ const JournalEditContent = props => {
         body: journal.body,
         date: moment(journal.date).format('YYYY-MM-DD'),
         mood: journal.mood,
-        favourite: journal.mood
+        favourite: journal.favourite
       })
     }
     // eslint-disable-next-line
@@ -24,7 +24,7 @@ const JournalEditContent = props => {
   const [entry, setEntry] = useState({
     title: '',
     body: '',
-    date: null,
+    date: '',
     mood: 'neutral',
     favourite: false
   })
@@ -52,8 +52,9 @@ const JournalEditContent = props => {
 
   const onSubmit = e => {
     e.preventDefault()
-    console.log('need to add functionality')
-    props.history.push('/journal')
+    // console.log('need to add functionality')
+    // props.history.push('/journal')
+    updateJournalEntry(entry, journal._id)
   }
 
   const styles = {

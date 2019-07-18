@@ -2,17 +2,11 @@
 const express = require('express')
 const router = express.Router()
 const { check, validationResult } = require('express-validator')
-
-// Model Imports
 const User = require('../models/User')
 const Journal = require('../models/Journal')
-
-// Middleware
 const auth = require('../middleware/auth')
 
-// @route       GET /api/journals
-// @desc        Get all users journal entries
-// @access      Private
+// GET   |   /api/journals   |   Get all journal entries from user    |   Private
 router.get('/', auth, async (req, res) => {
   try {
     // After the auth, the request should have a property of user.id (Not stored in req.body)
@@ -24,9 +18,7 @@ router.get('/', auth, async (req, res) => {
   }
 })
 
-// @route       POST /api/journals
-// @desc        Adding new journal entry
-// @access      Private
+// POST   |   /api/journals   |   Saving a new journal entry    |   Private
 router.post(
   '/',
   [
@@ -56,10 +48,6 @@ router.post(
         user: req.user.id
       })
 
-      // Old version just in case it breaks
-      // const journal = await newJournal.save()
-      // res.json({ journal })
-
       await newJournal.save()
       res.json({ msg: 'Sucessfully saved journal entry.' })
     } catch (err) {
@@ -69,13 +57,11 @@ router.post(
   }
 )
 
-// @route       PUT /api/journals
-// @desc        Updating an existing journal entry
-// @access      Private
+// PUT   |   /api/journals   |   Update an existing journal entry    |   Private
 router.put('/:id', auth, async (req, res) => {
   const { title, body, date, favourite, mood } = req.body
 
-  // Build a journal entry object
+  console.log('Before building journal entry object', req.body)
   const journalEntry = {}
   if (title) journalEntry.title = title
   if (body) journalEntry.body = body
@@ -89,16 +75,14 @@ router.put('/:id', auth, async (req, res) => {
     if (journal.user.toString() !== req.user.id) return res.status(401).send('Not authorized')
 
     journal = await Journal.findByIdAndUpdate(req.params.id, { $set: journalEntry }, { new: true })
-    res.json(journal)
+    res.json({ msg: 'Successfully updated journal entry.' })
   } catch (err) {
     console.error(err.message)
     res.status(500).send('Server error')
   }
 })
 
-// @route       DELETE /api/journals
-// @desc        Deleting an existing journal entry
-// @access      Private
+// DELETE   |   /api/journals   |   Delete an existing journal entry    |   Private
 router.delete('/:id', auth, async (req, res) => {
   let journal = await Journal.findById(req.params.id)
   if (!journal) return res.status(404).json({ msg: 'Journal entry not found' })

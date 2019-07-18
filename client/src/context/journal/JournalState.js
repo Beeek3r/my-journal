@@ -3,11 +3,11 @@ import JournalContext from './journalContext'
 import journalReducer from './journalReducer'
 import axios from 'axios'
 import setAuthToken from '../../utilities/setAuthToken'
-import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS } from '../types'
-import { withRouter } from "react-router-dom";
+import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS, EDIT_JOURNAL_ENTRY_SUCCESS } from '../types'
+import { withRouter } from 'react-router-dom'
 
 const JournalState = props => {
-  // State
+  // Intial State
   const intialState = {
     journalLog: null,
     journal: null,
@@ -17,10 +17,11 @@ const JournalState = props => {
     newJournalEntryMessage: null
   }
 
+  // Reducer & State Destructuring
   const [state, dispatch] = useReducer(journalReducer, intialState)
   const { journalLog, journal, loadingJournalLog, loadingJournalEntry, message, newJournalEntryMessage } = state
 
-  // Methods
+  // Journal
   const getJournalLog = async () => {
     try {
       if (localStorage.token) setAuthToken(localStorage.getItem('token'))
@@ -36,7 +37,13 @@ const JournalState = props => {
     dispatch({ type: CLEAR_JOURNAL_LOG })
   }
 
-  const saveNewJournalEntry = async (entry) => {
+  const setLoading = () => {
+    dispatch({ type: SET_LOADING })
+  }
+
+  // Save Journal Entry
+
+  const saveNewJournalEntry = async entry => {
     if (entry.date === null) {
       delete entry.date
     }
@@ -44,10 +51,10 @@ const JournalState = props => {
     try {
       if (localStorage.token) setAuthToken(localStorage.getItem('token'))
       const res = await axios.post('/api/journals', entry)
+      props.history.push('/journal')
       dispatch({ type: SAVE_JOURNAL_ENTRY_SUCCESS, payload: res.data })
       setLoading()
       getJournalLog()
-      props.history.push('/journal')
     } catch (err) {
       console.log(err.message.data)
     }
@@ -64,6 +71,20 @@ const JournalState = props => {
     dispatch({ type: CLEAR_NEW_JOURNAL_ENTRY_SUCCESS })
   }
 
+  const updateJournalEntry = async (entry, id) => {
+    // console.log('Journal State dawg, heres the body', entry, id)
+
+    try {
+      const res = await axios.put(`/api/journals/${id}`, entry)
+      if (res.data.msg === 'Successfully updated journal entry.') {
+        props.history.push('/journal')
+        dispatch({ type: EDIT_JOURNAL_ENTRY_SUCCESS, payload: res.data })
+      }
+    } catch (err) {}
+  }
+
+  // Viewing Journal Log In Modal
+
   const setJournalEntry = (journal, moodIcon, favouriteIcon) => {
     dispatch({ type: SET_JOURNAL_ENTRY, payload: journal })
     journal.moodIcon = moodIcon
@@ -77,7 +98,6 @@ const JournalState = props => {
       dispatch({ type: DELETE_JOURNAL_ENTRY_SUCCESS, payload: res.data })
       setLoading()
       getJournalLog()
-
     } catch (err) {
       console.log(err) // GOtta Double Check this stuf fhere my man
     }
@@ -85,10 +105,6 @@ const JournalState = props => {
 
   const removeMessage = () => {
     dispatch({ type: REMOVE_MESSAGE })
-  }
-
-  const setLoading = () => {
-    dispatch({ type: SET_LOADING })
   }
 
   const editJournalEntry = journal => {
@@ -111,11 +127,12 @@ const JournalState = props => {
         setNewJournalMessage,
         clearJournalLog,
         editJournalEntry,
-        removeMessage
+        removeMessage,
+        updateJournalEntry
       }}>
       {props.children}
     </JournalContext.Provider>
   )
 }
 
-export default withRouter(JournalState) 
+export default withRouter(JournalState)

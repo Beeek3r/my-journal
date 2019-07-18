@@ -3,7 +3,7 @@ import AuthContext from '../../context/auth/authContext'
 
 const Error = () => {
   const authContext = useContext(AuthContext)
-  const { error } = authContext
+  const { error, clearError } = authContext
 
   const styles = {
     button: {
@@ -13,8 +13,10 @@ const Error = () => {
 
   return (
     <div className="alert alert-danger mt-5 p-1 px-2 text-center" role="alert" style={styles.button}>
-      <i class="fas fa-times fa-fw px-3" />
-      {error.msg}
+      <span className="float-right errorButtonClose" onClick={clearError}>
+        <i class="fas fa-times-circle fa-fw" />
+      </span>
+      {error}
     </div>
   )
 }

@@ -10,13 +10,16 @@ const Journal = props => {
   const { loadUser } = authContext
 
   const journalContext = useContext(JournalContext)
-  const { getJournalLog, removeMessage } = journalContext
+  const { getJournalLog, removeMessage, message } = journalContext
 
   useEffect(() => {
     loadUser().then(getJournalLog())
-    // removeMessage()
+
+    if (message) removeMessage()
+    
+
     // eslint-disable-next-line
-  }, [])
+  }, [props.history])
 
   const styles = {
     sideNav: {
