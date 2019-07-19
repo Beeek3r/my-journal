@@ -70,12 +70,15 @@ const JournalState = props => {
 
   const updateJournalEntry = async (entry, id) => {
     try {
+      if (localStorage.token) setAuthToken(localStorage.getItem('token'))
       const res = await axios.put(`/api/journals/${id}`, entry)
       setLoading()
 
       if (res.data.msg === 'Successfully updated journal entry.') {
         props.history.push('/journal')
         dispatch({ type: EDIT_JOURNAL_ENTRY_SUCCESS, payload: res.data })
+        setLoading()
+        getJournalLog()
       }
     } catch (err) {}
   }
