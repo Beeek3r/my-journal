@@ -42,7 +42,8 @@ export default (state, action) => {
     case EDIT_JOURNAL_ENTRY_SUCCESS:
       return {
         ...state,
-        message: action.payload
+        message: action.payload,
+        loadingJournalLog: false
       }
 
     case SAVE_NEW_JOURNAL_ENTRY_SUCCESS:

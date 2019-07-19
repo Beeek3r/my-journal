@@ -61,7 +61,6 @@ router.post(
 router.put('/:id', auth, async (req, res) => {
   const { title, body, date, favourite, mood } = req.body
 
-  console.log('Before building journal entry object', req.body)
   const journalEntry = {}
   if (title) journalEntry.title = title
   if (body) journalEntry.body = body

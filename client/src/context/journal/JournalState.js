@@ -62,9 +62,6 @@ const JournalState = props => {
 
   const setNewJournalMessage = message => {
     dispatch({ type: SAVE_NEW_JOURNAL_ENTRY_SUCCESS, payload: message })
-    // setTimeout(() => {
-    //   clearNewJournalMessage()
-    // }, 2000)
   }
 
   const clearNewJournalMessage = () => {
@@ -72,10 +69,10 @@ const JournalState = props => {
   }
 
   const updateJournalEntry = async (entry, id) => {
-    // console.log('Journal State dawg, heres the body', entry, id)
-
     try {
       const res = await axios.put(`/api/journals/${id}`, entry)
+      setLoading()
+
       if (res.data.msg === 'Successfully updated journal entry.') {
         props.history.push('/journal')
         dispatch({ type: EDIT_JOURNAL_ENTRY_SUCCESS, payload: res.data })

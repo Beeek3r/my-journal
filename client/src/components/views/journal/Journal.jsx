@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, Fragment } from 'react'
+import React, { useContext, useEffect } from 'react'
 import JournalContent from './JournalContent'
 import AuthContext from '../../../context/auth/authContext'
 import JournalContext from '../../../context/journal/journalContext'
@@ -16,7 +16,6 @@ const Journal = props => {
     loadUser().then(getJournalLog())
 
     if (message) removeMessage()
-    
 
     // eslint-disable-next-line
   }, [props.history])
