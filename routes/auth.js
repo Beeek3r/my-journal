@@ -28,8 +28,8 @@ router.get('/', auth, async (req, res) => {
 router.post(
   '/',
   [
-    check('email', 'Please include a valid email').isEmail(), // prettier-ignore
-    check('password', 'Password is required').not().isEmpty() // prettier-ignore
+    check('email', 'Please enter a valid email address.').isEmail(), // prettier-ignore
+    check('password', 'Password is required.').not().isEmpty() // prettier-ignore
   ],
   async (req, res) => {
     const { email, password } = req.body

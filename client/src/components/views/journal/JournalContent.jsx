@@ -48,16 +48,6 @@ const JournalContent = props => {
         <div className="col-12 col-lg-8  mb-3 px-2 d-flex align-items-stretch" style={{ minHeight: '50vh' }}>
           <div className="col-12 px-5 py-4 shadow-sm bg-white rounded text-center">
             {message && !loadingJournalLog ? <Message /> : <Fragment />}
-
-            {/* {// prettier-ignore
-            loadingJournalLog ? 
-              <div className="spinner-grow text-theme-7" style={{width: '3rem', height: '3rem'}} role="status">
-                <span className="sr-only p-5">Loading...</span>
-              </div>
-              : 
-              journalLog.map(journal => (
-                <JournalItem journal={journal} key={journal._id} />
-              ))} */}
             {journalEntries}
           </div>
 

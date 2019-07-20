@@ -3,7 +3,7 @@ import JournalContext from './journalContext'
 import journalReducer from './journalReducer'
 import axios from 'axios'
 import setAuthToken from '../../utilities/setAuthToken'
-import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS, EDIT_JOURNAL_ENTRY_SUCCESS } from '../types'
+import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS, EDIT_JOURNAL_ENTRY_SUCCESS } from '../types'
 import { withRouter } from 'react-router-dom'
 
 const JournalState = props => {
@@ -56,7 +56,7 @@ const JournalState = props => {
       setLoading()
       getJournalLog()
     } catch (err) {
-      console.log(err.message.data)
+      console.log('Error saveNewJournEntry didnt work')
     }
   }
 
@@ -65,7 +65,7 @@ const JournalState = props => {
   }
 
   const clearNewJournalMessage = () => {
-    dispatch({ type: CLEAR_NEW_JOURNAL_ENTRY_SUCCESS })
+    dispatch({ type: CLEAR_NEW_JOURNAL_ENTRY })
   }
 
   const updateJournalEntry = async (entry, id) => {
@@ -128,7 +128,8 @@ const JournalState = props => {
         clearJournalLog,
         editJournalEntry,
         removeMessage,
-        updateJournalEntry
+        updateJournalEntry,
+        clearNewJournalMessage
       }}>
       {props.children}
     </JournalContext.Provider>

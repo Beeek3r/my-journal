@@ -38,13 +38,12 @@ const JournalNewContent = props => {
   const onSubmit = e => {
     e.preventDefault()
 
-    // if (entry.title == '') {
-    //   setNewJournalMessage({ msg: 'Please enter a title for this entry.', type: 'danger' })
-    // } else {
-    saveNewJournalEntry(entry)
-    // props.history.push('/journal')
+    if (entry.title === '') {
+      setNewJournalMessage({ msg: 'Please enter a title for this entry.', type: 'danger' })
+    } else {
+      saveNewJournalEntry(entry)
+    }
   }
-  // }
 
   const styles = {
     textarea: {
