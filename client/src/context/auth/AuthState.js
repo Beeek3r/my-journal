@@ -7,7 +7,7 @@ import setAuthToken from '../../utilities/setAuthToken'
 import { REGISTER_SUCCESS } from '../types'
 
 const AuthState = props => {
-  // State
+  // State & Reducer
   const intialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
@@ -37,10 +37,7 @@ const AuthState = props => {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data.token })
       loadUser()
     } catch (err) {
-      dispatch({ type: REGISTER_FAIL, payload: err.response.data.errors[0] }) // Somewhat hacky because if there is multple errors, I'm only showing the first one that comes back from the array called. // Maybe need to fix maybe don't lmao
-      setTimeout(() => {
-        clearError()
-      }, 5000)
+      dispatch({ type: REGISTER_FAIL, payload: err.response.data })
     }
   }
 
@@ -56,12 +53,8 @@ const AuthState = props => {
   }
 
   // Set Error
-  const setError = (error, duration = 5000) => {
-    // Expecting object {msg: 'Your error'>}
+  const setError = error => {
     dispatch({ type: SET_ERROR, payload: error })
-    setTimeout(() => {
-      clearError()
-    }, duration)
   }
 
   // Clear Error

@@ -42,7 +42,7 @@ const JournalModal = props => {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" style={{ whiteSpace: 'pre-wrap', minHeight: '200px' }}>
+          <div class="modal-body" style={{ whiteSpace: 'pre-wrap', minHeight: '200px', wordBreak: 'break-all' }}>
             {journal && journal.body}
           </div>
           <div class="modal-footer">

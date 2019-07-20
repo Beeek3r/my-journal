@@ -1,19 +1,9 @@
 import React, { Fragment, useEffect, useContext } from 'react'
-import JournalContext from '../../../context/journal/journalContext'
 import ItemJournal from './ItemJournal'
 import Item1 from './Item1'
 import Item2 from './Item2'
 
 const HomeContent = () => {
-  const journalcontext = useContext(JournalContext)
-  const { getJournalLog } = journalcontext
-
-  useEffect(() => {
-    getJournalLog()
-
-    // eslint-disable-next-line
-  }, [])
-
   return (
     <Fragment>
       {/* Start of Row 1 */}

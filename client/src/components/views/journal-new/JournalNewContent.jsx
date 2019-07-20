@@ -78,7 +78,7 @@ const JournalNewContent = props => {
                 </div>
                 <div className="form-group mx-1" style={styles.moodBox}>
                   <select className="form-control form-control-sm" name="mood" onChange={onChange} value={entry.mood}>
-                    <option value="neutral">Mood</option>
+                    <option value="mood">Mood</option>
                     <option value="neutral">Neutral</option>
                     <option value="happy">Happy</option>
                     <option value="sad">Sad</option>

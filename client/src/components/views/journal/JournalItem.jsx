@@ -71,7 +71,7 @@ const JournalItem = props => {
             </div>
           </div>
           <div className="card-body">
-            <p className="card-text text-muted text-left mb-4" style={{ whiteSpace: 'pre-wrap' }}>
+            <p className="card-text text-muted text-left mb-4" style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
               {displayBody}
             </p>
             <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={confirm} style={styles.button}>

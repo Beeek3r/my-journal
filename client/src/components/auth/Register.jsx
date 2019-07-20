@@ -75,7 +75,7 @@ const Register = props => {
             <input type="password" className="form-control" name="password2" value={password2} onChange={onChange} placeholder="Confirm password" required />
           </div>
           <button type="submit" className="btn btn-theme-7 w-100" style={{ color: '#fff' }}>
-            Login
+            Register
           </button>
         </form>
       </div>
