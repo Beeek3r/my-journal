@@ -38,13 +38,13 @@ const JournalNewContent = props => {
   const onSubmit = e => {
     e.preventDefault()
 
-    if (entry.title == '') {
-      setNewJournalMessage({ msg: 'Please enter a title for this entry.', type: 'danger' })
-    } else {
-      saveNewJournalEntry(entry)
-      // props.history.push('/journal')
-    }
+    // if (entry.title == '') {
+    //   setNewJournalMessage({ msg: 'Please enter a title for this entry.', type: 'danger' })
+    // } else {
+    saveNewJournalEntry(entry)
+    // props.history.push('/journal')
   }
+  // }
 
   const styles = {
     textarea: {
@@ -68,7 +68,7 @@ const JournalNewContent = props => {
           <div className="col-12 py-4 px-3 shadow-sm bg-white rounded d-flex align-items-center">
             <form className="w-100" onSubmit={onSubmit}>
               <div className="form-group">
-                <input type="text" className="form-control" name="title" placeholder="Title" onChange={onChange} required />
+                <input type="text" className="form-control" name="title" placeholder="Title" onChange={onChange} />
               </div>
               <div className="form-group">
                 <textarea className="form-control" name="body" placeholder="Journal entry" onChange={onChange} style={styles.textarea} />

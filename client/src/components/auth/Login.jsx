@@ -30,8 +30,10 @@ const Login = props => {
   const onSubmit = e => {
     e.preventDefault()
 
-    if (email === '' || password === '') {
-      setError({ msg: 'Please enter your login Credential' })
+    if (email === '') {
+      setError({ msg: 'Please enter your email address.' })
+    } else if (password === '') {
+      setError({ msg: 'Please enter your password.' })
     } else {
       login(user)
     }

@@ -29,49 +29,57 @@ router.post(
   '/',
   [
     check('email', 'Please include a valid email').isEmail(), // prettier-ignore
-    check('password', 'Password is required').exists()
+    check('password', 'Password is required').not().isEmpty() // prettier-ignore
   ],
   async (req, res) => {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ err: errors.array() })
-    }
-
     const { email, password } = req.body
-    try {
-      let user = await User.findOne({ email })
+    const errors = validationResult(req)
+    let errorMessage = ''
+    const errorResults = errors.array()
 
-      if (!user) {
-        return res.status(400).json({ msg: 'Invalid Credentials' })
+    console.log(errors)
+
+    if (!errors.isEmpty()) {
+      for (i = 0; i < errorResults.length; i++) {
+        errorMessage += ` ${errorResults[i].msg}`
       }
+      res.status(400).json({ msg: errorMessage })
+    } else {
+      try {
+        let user = await User.findOne({ email })
 
-      const isMatch = await bcrypt.compare(password, user.password)
-
-      if (!isMatch) {
-        return res.status(400).json({ msg: 'Invalid Credentials' })
-      }
-
-      const payload = {
-        user: {
-          id: user.id
+        if (!user) {
+          return res.status(400).json({ msg: 'Invalid Credentials' })
         }
-      }
 
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        {
-          // Usually use 3600 for 1 hour
-          expiresIn: 360000
-        },
-        (err, token) => {
-          if (err) throw error
-          res.json({ token })
+        const isMatch = await bcrypt.compare(password, user.password)
+
+        if (!isMatch) {
+          return res.status(400).json({ msg: 'Invalid Credentials' })
         }
-      )
-    } catch (err) {
-      console.error(err.message)
-      res.status(500).send('Server error')
+
+        const payload = {
+          user: {
+            id: user.id
+          }
+        }
+
+        jwt.sign(
+          payload,
+          config.get('jwtSecret'),
+          {
+            // Usually use 3600 for 1 hour
+            expiresIn: 360000
+          },
+          (err, token) => {
+            if (err) throw error
+            res.json({ token })
+          }
+        )
+      } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+      }
     }
   }
 )

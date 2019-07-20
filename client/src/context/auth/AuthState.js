@@ -26,7 +26,7 @@ const AuthState = props => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data.token })
       loadUser()
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.response.data.err[0].msg })
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data })
     }
   }
 

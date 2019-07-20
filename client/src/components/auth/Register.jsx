@@ -35,7 +35,7 @@ const Register = props => {
     e.preventDefault()
 
     if (firstName === '' || lastName === '' || email === '' || password === '' || password2 === '') {
-      setError({ msg: 'Please enter all fields' })
+      setError({ msg: 'Please enter in all fields' })
     } else if (password !== password2) {
       setError({ msg: 'Passwords do not match' })
     } else if (password.length < 6 || password.length > 20) {

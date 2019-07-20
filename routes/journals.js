@@ -24,35 +24,40 @@ router.post(
   [
     auth,
     [
-      check('title', 'Title is required')
-        .not()
-        .isEmpty(),
-      check('favourite', 'Expected a boolean for favourite').isBoolean()
+      // prettier-ignore
+      check('title', 'Title is required.').not().isEmpty(),
+      check('favourite', 'Expected a boolean for favourite.').isBoolean()
     ]
   ],
   async (req, res) => {
     const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
-    }
-
+    let errorMessage = ''
     const { title, body, date, favourite, mood } = req.body
 
-    try {
-      const newJournal = new Journal({
-        title,
-        body,
-        date,
-        favourite,
-        mood,
-        user: req.user.id
-      })
+    // Check if there are any errors
+    if (!errors.isEmpty()) {
+      const errorResults = errors.array()
 
-      await newJournal.save()
-      res.json({ msg: 'Sucessfully saved journal entry.' })
-    } catch (err) {
-      console.error(err.message)
-      res.status(500).send('Server error')
+      for (i = 0; i < errorResults.length; i++) {
+        errorMessage += ` ${errorResults[i].msg}`
+      }
+      res.status(400).json({ msg: errorMessage })
+    } else {
+      try {
+        const newJournal = new Journal({
+          title,
+          body,
+          date,
+          favourite,
+          mood,
+          user: req.user.id
+        })
+        await newJournal.save()
+        res.json({ msg: 'Sucessfully saved journal entry.' })
+      } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server error')
+      }
     }
   }
 )
