@@ -62,7 +62,6 @@ const Login = props => {
             Login
           </button>
         </form>
-        <p>Test Username: jamesdoe@gmail.com || Password: 123456</p>
       </div>
     </Fragment>
   )
