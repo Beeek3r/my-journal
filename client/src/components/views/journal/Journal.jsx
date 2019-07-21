@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import JournalContent from './JournalContent'
+import Content from './Content'
 import AuthContext from '../../../context/auth/authContext'
 import JournalContext from '../../../context/journal/journalContext'
 import Navbar from '../../../common/Navbar'
@@ -42,7 +42,7 @@ const Journal = props => {
       </div>
       <div className="col min-vh-100" style={styles.contentColumn}>
         <Topbar page={props.location.pathname} />
-        <JournalContent history={props.history} />
+        <Content history={props.history} />
       </div>
     </div>
   )

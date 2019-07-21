@@ -1,25 +1,13 @@
 import React, { useContext, Fragment } from 'react'
-import JournalItem from './JournalItem'
+
 import JournalModal from './JournalModal'
 import Message from './Message'
 import JournalContext from '../../../context/journal/journalContext'
+import Journals from './Journals'
 
 const JournalContent = props => {
   const journalContext = useContext(JournalContext)
   const { journalLog, loadingJournalLog, journal, message } = journalContext
-
-  let journalEntries
-  if (loadingJournalLog) {
-    journalEntries = (
-      <div className="spinner-grow text-theme-7" style={{ width: '3rem', height: '3rem' }} role="status">
-        <span className="sr-only p-5">Loading...</span>
-      </div>
-    )
-  } else if (journalLog && journalLog.length > 0) {
-    journalEntries = journalLog.map(journal => <JournalItem journal={journal} key={journal._id} history={props.history} />)
-  } else if (journalLog && journalLog.length === 0) {
-    journalEntries = <h4 class="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
-  }
 
   return (
     <Fragment>
@@ -48,9 +36,16 @@ const JournalContent = props => {
         <div className="col-12 col-lg-8  mb-3 px-2 d-flex align-items-stretch" style={{ minHeight: '50vh' }}>
           <div className="col-12 px-5 py-4 shadow-sm bg-white rounded text-center">
             {message && !loadingJournalLog ? <Message /> : <Fragment />}
-            {journalEntries}
+            {journalLog ? (
+              <Journals history={props.history} />
+            ) : (
+              <div className="text-center my-3">
+                <div class="spinner-border text-theme-7" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            )}
           </div>
-
           <JournalModal journal={journal} history={props.history} />
         </div>
       </div>
