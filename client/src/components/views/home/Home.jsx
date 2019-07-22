@@ -23,7 +23,7 @@ const Home = props => {
       </div>
       <div className="col min-vh-100" style={{ background: '#F5F5F5' }}>
         <Topbar page={props.location.pathname} />
-        <HomeContent />
+        <HomeContent history={props.history} />
       </div>
     </div>
   )

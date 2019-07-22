@@ -1,15 +1,24 @@
 import React, { useEffect, useContext } from 'react'
 import JournalContext from '../../../context/journal/journalContext'
 
-const ItemJournal = () => {
+const ItemJournal = props => {
   const journalcontext = useContext(JournalContext)
-  const { getJournalLog, journalLog } = journalcontext
+  const { getJournalLog, journalLog, setJournalEntry } = journalcontext
 
   useEffect(() => {
     getJournalLog()
-
     // eslint-disable-next-line
   }, [])
+
+  const onClick = (entry, mood, favourite) => {
+    setJournalEntry(entry, mood, favourite)
+    props.history.push('/journal')
+
+    // Toggling the modal doesn't work if it is called without the setTimeout
+    setTimeout(() => {
+      window.$('#journal-modal').modal('show')
+    })
+  }
 
   return (
     <div className=" col-lg-6 px-2 col-12 mb-3">
@@ -18,12 +27,17 @@ const ItemJournal = () => {
         <div className="list-group">
           {journalLog ? (
             journalLog.slice(0, 5).map(entry => (
-              <a href="#" className="list-group-item list-group-item-action">
+              <button
+                href="#"
+                className="list-group-item list-group-item-action"
+                onClick={() => {
+                  onClick(entry, entry.mood, entry.favourite)
+                }}>
                 {entry.title}
                 <span className="float-right">
                   <i className={`${entry.favourite ? 'fas' : 'far'} fa-star fa-fd text-warning`} />
                 </span>
-              </a>
+              </button>
             ))
           ) : (
             <div className="text-center my-3">

@@ -3,12 +3,12 @@ import ItemJournal from './ItemJournal'
 import Item1 from './Item1'
 import Item2 from './Item2'
 
-const HomeContent = () => {
+const HomeContent = props => {
   return (
     <Fragment>
       {/* Start of Row 1 */}
       <div className="row px-3 justify-content-between" style={{ marginTop: '67px' }}>
-        <ItemJournal />
+        <ItemJournal history={props.history} />
         <Item1 />
         <Item2 />
       </div>
