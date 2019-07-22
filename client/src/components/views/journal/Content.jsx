@@ -4,6 +4,7 @@ import JournalModal from './JournalModal'
 import Message from './Message'
 import JournalContext from '../../../context/journal/journalContext'
 import Journals from './Journals'
+import JournalFilter from './JournalFilter'
 
 const JournalContent = props => {
   const journalContext = useContext(JournalContext)
@@ -14,7 +15,7 @@ const JournalContent = props => {
       <div className="row px-3 justify-content-center" style={{ marginTop: '67px' }}>
         <div className="col-12 col-lg-8 mb-3 px-2 d-flex align-items-stretch">
           <div className="col-12 py-4 px-3 shadow-sm bg-white rounded d-flex align-items-center">
-            <div className="w-100">
+            {/* <div className="w-100">
               <h4 className="text-center mb-4 text-muted">@Todo add some sort of filter or stats or some shit</h4>
               <div className="row">
                 <div className="col-12 col-md-5">
@@ -28,7 +29,9 @@ const JournalContent = props => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
+            <JournalFilter />
+            {/* todo later, make sure you dont filter while it is loading or it crashes */}
           </div>
         </div>
       </div>

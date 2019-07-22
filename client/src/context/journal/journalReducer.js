@@ -1,4 +1,4 @@
-import { GET_JOURNAL_LOG, GET_JOURNAL, CLEAR_JOURNAL, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS, EDIT_JOURNAL_ENTRY_SUCCESS } from '../types'
+import { GET_JOURNAL_LOG, GET_JOURNAL, CLEAR_JOURNAL, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS, EDIT_JOURNAL_ENTRY_SUCCESS, FILTER_JOURNAL, CLEAR_FILTER } from '../types'
 
 export default (state, action) => {
   switch (action.type) {
@@ -68,6 +68,21 @@ export default (state, action) => {
       return {
         ...state,
         loadingJournalLog: true
+      }
+
+    case FILTER_JOURNAL:
+      return {
+        ...state,
+        filtered: state.journalLog.filter(journal => {
+          return journal.title.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1 || journal.body.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1
+        })
+      }
+
+    case CLEAR_FILTER:
+      console.log('Im making it null')
+      return {
+        ...state,
+        filtered: null
       }
 
     default:

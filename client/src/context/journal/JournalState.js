@@ -3,7 +3,7 @@ import JournalContext from './journalContext'
 import journalReducer from './journalReducer'
 import axios from 'axios'
 import setAuthToken from '../../utilities/setAuthToken'
-import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS, EDIT_JOURNAL_ENTRY_SUCCESS } from '../types'
+import { GET_JOURNAL_LOG, SET_JOURNAL_ENTRY, DELETE_JOURNAL_ENTRY_SUCCESS, SET_LOADING, REMOVE_MESSAGE, SAVE_NEW_JOURNAL_ENTRY_SUCCESS, CLEAR_NEW_JOURNAL_ENTRY, CLEAR_JOURNAL_LOG, EDIT_ENTRY, SAVE_JOURNAL_ENTRY_SUCCESS, EDIT_JOURNAL_ENTRY_SUCCESS, FILTER_JOURNAL, CLEAR_FILTER } from '../types'
 import { withRouter } from 'react-router-dom'
 
 const JournalState = props => {
@@ -14,12 +14,13 @@ const JournalState = props => {
     loadingJournalLog: true,
     loadingJournalEntry: false,
     message: null,
-    newJournalEntryMessage: null
+    newJournalEntryMessage: null,
+    filtered: null
   }
 
   // Reducer & State Destructuring
   const [state, dispatch] = useReducer(journalReducer, intialState)
-  const { journalLog, journal, loadingJournalLog, loadingJournalEntry, message, newJournalEntryMessage } = state
+  const { journalLog, journal, loadingJournalLog, loadingJournalEntry, message, newJournalEntryMessage, filtered } = state
 
   // Journal
   const getJournalLog = async () => {
@@ -111,6 +112,21 @@ const JournalState = props => {
     dispatch({ type: EDIT_ENTRY, payload: journal })
   }
 
+  const filterJournal = text => {
+    // // var replaceBackslashs = text.replace(/\\/g, '\\')
+    // var replaceCarets = text.replace(/^/g, '\\')
+    // var replaceBrackets = replaceCarets.replace(/\[/g, '\\')
+
+    // console.log(replaceCarets)
+
+    dispatch({ type: FILTER_JOURNAL, payload: text })
+  }
+
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER })
+    console.log('Im clearing')
+  }
+
   return (
     <JournalContext.Provider
       value={{
@@ -129,7 +145,10 @@ const JournalState = props => {
         editJournalEntry,
         removeMessage,
         updateJournalEntry,
-        clearNewJournalMessage
+        clearNewJournalMessage,
+        filtered,
+        filterJournal,
+        clearFilter
       }}>
       {props.children}
     </JournalContext.Provider>

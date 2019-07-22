@@ -5,7 +5,7 @@ import Pagination from './Pagination'
 
 const Journals = props => {
   const journalContext = useContext(JournalContext)
-  const { journalLog, loadingJournalLog, journal, message } = journalContext
+  const { journalLog, filtered } = journalContext
 
   const [currentPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(10)
@@ -27,9 +27,7 @@ const Journals = props => {
   if (journalLog.length > 0) {
     return (
       <Fragment>
-        {currentPosts.map(journal => (
-          <JournalItem journal={journal} key={journal._id} history={props.history} />
-        ))}
+        {filtered ? filtered.map(journal => <JournalItem journal={journal} key={journal._id} history={props.history} />) : currentPosts.map(journal => <JournalItem journal={journal} key={journal._id} history={props.history} />)}
         <Pagination postsPerPage={postsPerPage} totalPosts={journalLog.length} paginate={paginate} />
       </Fragment>
     )
