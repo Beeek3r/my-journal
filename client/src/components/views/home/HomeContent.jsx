@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext } from 'react'
+import React, { Fragment } from 'react'
 import ItemJournal from './ItemJournal'
 import Item1 from './Item1'
 import Item2 from './Item2'

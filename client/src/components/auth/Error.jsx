@@ -14,7 +14,7 @@ const Error = () => {
   return (
     <div className="alert alert-danger mt-5 p-1 px-2 text-center" role="alert" style={styles.button}>
       <span className="float-right errorButtonClose" onClick={clearError}>
-        <i class="fas fa-times-circle fa-fw" />
+        <i className="fas fa-times-circle fa-fw" />
       </span>
       {error.msg}
     </div>

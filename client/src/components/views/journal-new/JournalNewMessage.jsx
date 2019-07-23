@@ -10,7 +10,7 @@ const Message = () => {
       <div className={`alert alert-${newJournalEntryMessage.type} p-1 px-2 w-100`} role="alert" style={{ fontSize: '0.9rem' }}>
         {newJournalEntryMessage.msg}
         <span className="float-right errorButtonClose" onClick={clearNewJournalMessage}>
-          <i class="fas fa-times-circle fa-fw" />
+          <i className="fas fa-times-circle fa-fw" />
         </span>
       </div>
     </div>

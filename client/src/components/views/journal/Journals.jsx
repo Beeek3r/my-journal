@@ -26,7 +26,7 @@ const Journals = props => {
 
   // Checks if the Journal Log is empty
   if (journalLog.length === 0) {
-    return <h4 class="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
+    return <h4 className="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
   }
 
   // Display pagination & filter

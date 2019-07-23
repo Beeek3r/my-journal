@@ -8,7 +8,7 @@ const Message = () => {
   return (
     <div className="form-group mt-3 text-center">
       <div className={`alert alert-${newJournalEntryMessage.type} p-1 px-2 w-100`} role="alert" style={{ fontSize: '0.9rem' }}>
-        <i class="fas fa-check fa-fw" /> {}
+        <i className="fas fa-check fa-fw" /> {}
         {newJournalEntryMessage.msg}
       </div>
     </div>

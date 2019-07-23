@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, Fragment, useState } from 'react'
+import React, { useContext, Fragment, useState } from 'react'
 import JournalContext from '../../../context/journal/journalContext'
 import NewJournalMessage from './JournalNewMessage'
 

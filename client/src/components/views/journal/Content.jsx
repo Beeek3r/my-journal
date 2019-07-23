@@ -15,23 +15,7 @@ const JournalContent = props => {
       <div className="row px-3 justify-content-center" style={{ marginTop: '67px' }}>
         <div className="col-12 col-lg-8 mb-3 px-2 d-flex align-items-stretch">
           <div className="col-12 py-4 px-3 shadow-sm bg-white rounded d-flex align-items-center">
-            {/* <div className="w-100">
-              <h4 className="text-center mb-4 text-muted">@Todo add some sort of filter or stats or some shit</h4>
-              <div className="row">
-                <div className="col-12 col-md-5">
-                  <div className="progress mt-1" style={{ height: '1rem' }}>
-                    <div className="progress-bar progress-bar-striped progress-bar-animated bg-theme-7 p-3" role="progressbar" style={{ width: '71%' }} aria-valuenow="20" aria-valuemin="0" aria-valuemax="31" />
-                  </div>
-                </div>
-                <div className="col-12 col-md-5">
-                  <div className="progress mt-1" style={{ height: '1rem' }}>
-                    <div className="progress-bar progress-bar-striped progress-bar-animated bg-theme-7 p-3" role="progressbar" style={{ width: '71%' }} aria-valuenow="20" aria-valuemin="0" aria-valuemax="31" />
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <JournalFilter />
-            {/* todo later, make sure you dont filter while it is loading or it crashes */}
           </div>
         </div>
       </div>
@@ -43,8 +27,8 @@ const JournalContent = props => {
               <Journals history={props.history} />
             ) : (
               <div className="text-center my-3">
-                <div class="spinner-border text-theme-7" role="status">
-                  <span class="sr-only">Loading...</span>
+                <div className="spinner-border text-theme-7" role="status">
+                  <span className="sr-only">Loading...</span>
                 </div>
               </div>
             )}

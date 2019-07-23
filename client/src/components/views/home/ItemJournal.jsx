@@ -14,9 +14,8 @@ const ItemJournal = props => {
     setJournalEntry(entry, mood, favourite)
     props.history.push('/journal')
 
-    // Toggling the modal doesn't work if it is called without the setTimeout
     setTimeout(() => {
-      window.$('#journal-modal').modal('show')
+      window.$('#journal-modal').modal('show') // setTimeout is needed or modal won't open
     })
   }
 
@@ -28,6 +27,7 @@ const ItemJournal = props => {
           {journalLog ? (
             journalLog.slice(0, 5).map(entry => (
               <button
+                key={entry._id}
                 href="#"
                 className="list-group-item list-group-item-action"
                 onClick={() => {
@@ -41,8 +41,8 @@ const ItemJournal = props => {
             ))
           ) : (
             <div className="text-center my-3">
-              <div class="spinner-border text-theme-7" role="status">
-                <span class="sr-only">Loading...</span>
+              <div className="spinner-border text-theme-7" role="status">
+                <span className="sr-only">Loading...</span>
               </div>
             </div>
           )}

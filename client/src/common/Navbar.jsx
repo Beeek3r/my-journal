@@ -57,7 +57,7 @@ const Navbar = () => {
           <Link to="#" className={styles.navLink} data-toggle="collapse" data-target="#collapseFinance" aria-expanded="true" aria-controls="collapseOne">
             <i className="fas fa-dollar-sign fa-fw mr-2" />
             <span>FINANCE</span>
-            <i style={{ color: '#e7fa2e' }} class="fas fa-exclamation-circle ml-2" />
+            <i style={{ color: '#e7fa2e' }} className="fas fa-exclamation-circle ml-2" />
           </Link>
           <div id="collapseFinance" className="collapse w-100 pl-4" aria-labelledby="headingOne" data-parent="#accordion">
             <Link to="/journal/edit" className={styles.navSubLink} style={{ fontSize: '12px' }}>
@@ -75,7 +75,7 @@ const Navbar = () => {
           <Link to="#" className={styles.navLink} data-toggle="collapse" data-target="#collapseNutrition" aria-expanded="true" aria-controls="collapseOne">
             <i className="fas fa-hamburger fa-fw mr-2" />
             <span>NUTRITION</span>
-            <i style={{ color: '#dd382c' }} class="fas fa-exclamation-circle ml-2" />
+            <i style={{ color: '#dd382c' }} className="fas fa-exclamation-circle ml-2" />
           </Link>
           <div id="collapseNutrition" className="collapse w-100 pl-4" aria-labelledby="headingOne" data-parent="#accordion">
             <Link to="/" className={styles.navSubLink} style={{ fontSize: '12px' }}>
@@ -93,7 +93,7 @@ const Navbar = () => {
           <Link to="#" className={styles.navLink} data-toggle="collapse" data-target="#collapseExercise" aria-expanded="true" aria-controls="collapseOne">
             <i className="fas fa-running fa-fw mr-2" />
             <span>EXERCISE</span>
-            <i style={{ color: '#dd382c' }} class="fas fa-exclamation-circle ml-2" />
+            <i style={{ color: '#dd382c' }} className="fas fa-exclamation-circle ml-2" />
           </Link>
           <div id="collapseExercise" className="collapse w-100 pl-4" aria-labelledby="headingOne" data-parent="#accordion">
             <Link to="/" className={styles.navSubLink} style={{ fontSize: '12px' }}>
@@ -116,7 +116,7 @@ const Navbar = () => {
           <Link to="/account" className={styles.navLink}>
             <i className="fas fa-user fa-fw mr-2" />
             <span>ACCOUNT</span>
-            <i style={{ color: '#dd382c' }} class="fas fa-exclamation-circle ml-2" />
+            <i style={{ color: '#dd382c' }} className="fas fa-exclamation-circle ml-2" />
           </Link>
           <Link to="/#" onClick={onLogout} className={styles.navLink}>
             <i className="fas fa-sign-out-alt fa-fw mr-2" />

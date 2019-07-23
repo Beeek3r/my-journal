@@ -4,14 +4,9 @@ import Navbar from '../../../common/Navbar'
 import Topbar from '../../../common/Topbar'
 import JournalEditContent from './JournalEditContent'
 
-import JournalContext from '../../../context/journal/journalContext'
-
 const JournalEdit = props => {
   const authContext = useContext(AuthContext)
   const { loadUser } = authContext
-
-  const journalContext = useContext(JournalContext)
-  const { newJournalEntryMessage } = journalContext
 
   useEffect(() => {
     loadUser()

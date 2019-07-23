@@ -26,7 +26,6 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
               onClick={() => {
                 paginate(number)
               }}
-              href="#"
               className="page-link text-muted">
               {number}
             </a>

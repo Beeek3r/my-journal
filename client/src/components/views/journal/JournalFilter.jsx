@@ -8,7 +8,6 @@ const JournalFilter = () => {
   useEffect(() => {
     if (journalContext.filtered !== null) {
       text.current.value = ''
-    } else {
     }
     // eslint-disable-next-line
   }, [])

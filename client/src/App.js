@@ -19,17 +19,17 @@ function App() {
     <Router>
       <AuthState>
         <JournalState>
-            <Switch>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
 
-              <PrivateRoute exact path="/" component={Home} />
-              <PrivateRoute exact path="/journal" component={Journal} />
-              <PrivateRoute exact path="/journal/new" component={JournalNew} />
-              <PrivateRoute exact path="/journal/edit" component={JournalEdit} />
+            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/journal" component={Journal} />
+            <PrivateRoute exact path="/journal/new" component={JournalNew} />
+            <PrivateRoute exact path="/journal/edit" component={JournalEdit} />
 
-              <PrivateRoute component={NotFound} />
-            </Switch>
+            <PrivateRoute component={NotFound} />
+          </Switch>
         </JournalState>
       </AuthState>
     </Router>

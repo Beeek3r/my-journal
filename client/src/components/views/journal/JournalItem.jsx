@@ -75,13 +75,13 @@ const JournalItem = props => {
               {displayBody}
             </p>
             <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={confirm} style={styles.button}>
-              <i class="fas fa-trash fa-fw" /> Delete
+              <i className="fas fa-trash fa-fw" /> Delete
             </button>
             <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={onEdit} style={styles.button}>
-              <i class="fas fa-pen fa-fw" /> Edit
+              <i className="fas fa-pen fa-fw" /> Edit
             </button>
             <button className="btn float-right mx-1 btn-theme-4 btn-sm text-muted" onClick={getJournalEntry} data-toggle="modal" data-target="#journal-modal" style={styles.button}>
-              <i class="fas fa-eye fa-fw" /> View
+              <i className="fas fa-eye fa-fw" /> View
             </button>
           </div>
         </div>
