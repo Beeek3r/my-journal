@@ -24,15 +24,30 @@ const Journals = props => {
     setCurrentPage(pagenumber)
   }
 
-  if (journalLog.length > 0) {
+  // Checks if the Journal Log is empty
+  if (journalLog.length === 0) {
+    return <h4 class="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
+  }
+
+  // Display pagination & filter
+  if (filtered) {
     return (
       <Fragment>
-        {filtered ? filtered.map(journal => <JournalItem journal={journal} key={journal._id} history={props.history} />) : currentPosts.map(journal => <JournalItem journal={journal} key={journal._id} history={props.history} />)}
+        {filtered.slice(indexOfFirstPost, indexOfLastPost).map(journal => (
+          <JournalItem journal={journal} key={journal._id} history={props.history} />
+        ))}
         <Pagination postsPerPage={postsPerPage} totalPosts={journalLog.length} paginate={paginate} />
       </Fragment>
     )
   } else {
-    return <h4 class="text-center mb-4 text-muted">Journal Log: 0 Entries</h4>
+    return (
+      <Fragment>
+        {currentPosts.map(journal => (
+          <JournalItem journal={journal} key={journal._id} history={props.history} />
+        ))}
+        <Pagination postsPerPage={postsPerPage} totalPosts={journalLog.length} paginate={paginate} />
+      </Fragment>
+    )
   }
 }
 
