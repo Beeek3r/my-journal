@@ -1,25 +1,25 @@
-import React, { Fragment, useContext } from 'react'
-import { Link } from 'react-router-dom'
-import AuthContext from '../context/auth/authContext'
-import JournalContext from '../context/journal/journalContext'
-import logo from './logo.png'
+import React, { Fragment, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AuthContext from '../context/auth/authContext';
+import JournalContext from '../context/journal/journalContext';
+import logo from './logo.png';
 
 const styles = {
   navLink: 'nav-link text-light w-100 p-2',
   navSubLink: 'nav-link text-light w-100 p-2'
-}
+};
 
 const Navbar = () => {
-  const authContext = useContext(AuthContext)
-  const { logout } = authContext
+  const authContext = useContext(AuthContext);
+  const { logout } = authContext;
 
-  const journalContent = useContext(JournalContext)
-  const { clearJournalLog } = journalContent
+  const journalContent = useContext(JournalContext);
+  const { clearJournalLog } = journalContent;
 
   const onLogout = () => {
-    logout()
-    clearJournalLog()
-  }
+    logout();
+    clearJournalLog();
+  };
 
   return (
     <Fragment>
@@ -57,10 +57,10 @@ const Navbar = () => {
           <Link to="#" className={styles.navLink} data-toggle="collapse" data-target="#collapseFinance" aria-expanded="true" aria-controls="collapseOne">
             <i className="fas fa-dollar-sign fa-fw mr-2" />
             <span>FINANCE</span>
-            <i style={{ color: '#e7fa2e' }} className="fas fa-exclamation-circle ml-2" />
+            <i style={{ color: '#dd382c' }} className="fas fa-exclamation-circle ml-2" />
           </Link>
           <div id="collapseFinance" className="collapse w-100 pl-4" aria-labelledby="headingOne" data-parent="#accordion">
-            <Link to="/journal/edit" className={styles.navSubLink} style={{ fontSize: '12px' }}>
+            <Link to="/" className={styles.navSubLink} style={{ fontSize: '12px' }}>
               <i className="fas fa-credit-card fa-fw mr-2" />
               <span>INCOME STATEMENT</span>
             </Link>
@@ -125,6 +125,6 @@ const Navbar = () => {
         </nav>
       </div>
     </Fragment>
-  )
-}
-export default Navbar
+  );
+};
+export default Navbar;

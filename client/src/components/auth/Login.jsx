@@ -1,43 +1,43 @@
-import React, { Fragment, useState, useContext, useEffect } from 'react'
-import AuthContext from '../../context/auth/authContext'
-import Error from './Error'
-import GuessNavbar from './GuessNavbar'
+import React, { Fragment, useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
+import Error from './Error';
+import GuessNavbar from './GuessNavbar';
 
 const Login = props => {
   // Context
-  const authContext = useContext(AuthContext)
-  const { login, isAuthenticated, error, setError } = authContext
+  const authContext = useContext(AuthContext);
+  const { login, isAuthenticated, error, setError } = authContext;
 
   // State
   const [user, setUser] = useState({
     email: '',
     password: ''
-  })
-  const { email, password } = user
+  });
+  const { email, password } = user;
 
   // Hooks
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/')
+      props.history.push('/');
     }
-  }, [isAuthenticated, props.history])
+  }, [isAuthenticated, props.history]);
 
   // Methods
   const onChange = e => {
-    setUser({ ...user, [e.target.name]: e.target.value })
-  }
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (email === '') {
-      setError({ msg: 'Please enter your email address.' })
+      setError({ msg: 'Please enter your email address.' });
     } else if (password === '') {
-      setError({ msg: 'Please enter your password.' })
+      setError({ msg: 'Please enter your password.' });
     } else {
-      login(user)
+      login(user);
     }
-  }
+  };
 
   // Return
   return (
@@ -62,9 +62,13 @@ const Login = props => {
             Login
           </button>
         </form>
+        <p style={{ marginTop: '40px' }}>
+          Username: test123@gmail.com <br />
+          Password: 123456
+        </p>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

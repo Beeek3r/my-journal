@@ -1,6 +1,6 @@
-import React from 'react'
-import Logo from '../../common/logo.png'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import Logo from '../../common/logo.png';
+import { Link } from 'react-router-dom';
 
 const GuessNavbar = () => {
   return (
@@ -17,13 +17,10 @@ const GuessNavbar = () => {
           <Link className=" nav-link text-light" to="/register">
             Register
           </Link>
-          <Link className=" nav-link text-light" to="/about">
-            About
-          </Link>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default GuessNavbar
+export default GuessNavbar;
